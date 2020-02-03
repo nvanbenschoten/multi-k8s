@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cockroach-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: cockroach
+  template:
+    metadata:
+      labels:
+        component: cockroach
+    spec:
+      volumes:
+        - name: cockroach-storage
+          persistentVolumeClaim:
+            claimName: database-persistent-volume-claim
+      containers:
+        - name: cockroach
+          image: cockroachdb/cockroach:v19.2.2
+          args:
+            - "start"
+            - "--insecure"
+          ports:
+            - containerPort: 26257
+              name: pgwire
+            - containerPort: 8080
+              name: http
+          volumeMounts:
+            - name: cockroach-storage
+              mountPath: /cockroach/cockroach-data
