@@ -9,6 +9,6 @@ docker push nvanbenschoten/multi-server:$GIT_SHA
 docker push nvanbenschoten/multi-worker:$GIT_SHA
 
 kubectl apply -f k8s
-kubectl set image deployments/server-deployment server=nvanbenschoten=multi-server:$GIT_SHA
-kubectl set image deployments/client-deployment client=nvanbenschoten=multi-client:$GIT_SHA
-kubectl set image deployments/worker-deployment worker=nvanbenschoten=multi-worker:$GIT_SHA
+kubectl set image deployments/server-deployment server=nvanbenschoten/multi-server:$GIT_SHA
+kubectl set image deployments/client-deployment client=nvanbenschoten/multi-client:$GIT_SHA
+kubectl set image deployments/worker-deployment worker=nvanbenschoten/multi-worker:$GIT_SHA
